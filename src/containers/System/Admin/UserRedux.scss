@@ -1,0 +1,29 @@
+.avatar-load {
+  display: flex;
+
+  height: 40px;
+  .btn-load {
+    width: 35%;
+    text-align: center;
+    background: #bbbdbe;
+    height: auto;
+    margin-right: 5px;
+    padding: 5px 10px;
+    border: 1px solid #0071ba;
+    border-radius: 5px;
+    cursor: pointer;
+    i {
+      padding-left: 5px;
+      font-size: 12px;
+    }
+  }
+  .preview-load {
+    text-align: center;
+    width: 65%;
+    height: 80px;
+    border: 1px solid blue;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+  }
+}

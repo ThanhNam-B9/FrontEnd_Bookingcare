@@ -1,0 +1,148 @@
+.selection-share {
+  height: 325px;
+  border-bottom: 3px solid #efeef5;
+  &.selection-specialty {
+    //background: #fff;
+  }
+  &.selection-medical-facilities {
+    background: #f5f5f5;
+  }
+  &.selection-outstanding-doctor {
+    height: 384px;
+  }
+  &.selection-handbook {
+    background: #f5f5f5;
+  }
+  &.selection-about {
+    height: 466px;
+  }
+  .selection-container {
+    margin: 0 200px;
+    padding-top: 20px;
+    .selection-header {
+      font-size: 20px;
+      font-weight: 600;
+      color: #000;
+      padding: 15px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      button {
+        font-size: 12px;
+        background: #ebebeb;
+        text-transform: uppercase;
+        display: inline-block;
+        padding: 8px 12px;
+        color: #282e41;
+        border: none;
+        outline: none;
+        &:hover {
+          background: rgb(247, 216, 0);
+        }
+      }
+    }
+
+    .selection-body {
+      .selection-custommize {
+        .bg-image {
+          height: 150px;
+          width: 270px;
+          background-position: center center;
+          background-repeat: no-repeat;
+          background-size: cover !important;
+          &.selection-specialty {
+            background: url("../../assets/spectialty/co-xuong-khop.jpg");
+          }
+          &.selection-medical-facilities {
+            background: url("../../assets/medical-facilities/benh-vien-thu-cuc.jpg");
+          }
+          &.selection-outstanding-doctor {
+            padding: 10px 5px;
+            height: 100%;
+            border: 2px solid #eee;
+            .bg-avatar {
+              text-align: center;
+              cursor: pointer;
+              .avatar-doctor {
+                margin: 0 auto;
+                height: 120px;
+                width: 120px;
+                border-radius: 50%;
+                background: url("../../assets/medical-facilities/benh-vien-thu-cuc.jpg");
+              }
+
+              &:hover {
+                color: #45c3d2;
+              }
+              .avartar-name {
+                font-size: 13px;
+                margin-top: 10px;
+              }
+            }
+            .bg-title {
+              text-align: center;
+              font-size: 11px;
+              margin-bottom: 25px;
+            }
+          }
+          &.selection-handbook {
+            background: url("../../assets/medical-facilities/benh-vien-thu-cuc.jpg");
+          }
+        }
+      }
+    }
+    .section-about-content {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+    }
+    .content-left {
+      width: 50%;
+    }
+    .content-right {
+      width: 50%;
+      padding: 0 60px;
+      text-align: justify;
+      font-style: italic;
+    }
+  }
+}
+.home-footer {
+  height: 100px;
+  background: #45c3d2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  p {
+    color: #fff;
+    transform: translateY(50%);
+    a {
+      text-decoration: none;
+    }
+  }
+}
+.slick-prev,
+.slick-next {
+  background: rgb(247, 245, 245) !important;
+  opacity: 0.6 !important;
+  height: 44px !important;
+  width: 41px !important;
+  border: 2px solid #d7d7d7 !important;
+  &:hover {
+    background: #ffff !important;
+    opacity: 1 !important;
+  }
+}
+.slick-prev {
+  z-index: 100 !important;
+  left: -12px !important;
+}
+.slick-next {
+  right: -15px !important;
+}
+.slick-prev:before,
+.slick-next:before {
+  font-style: normal;
+  font-weight: 400;
+  color: rgb(139, 139, 139) !important;
+}

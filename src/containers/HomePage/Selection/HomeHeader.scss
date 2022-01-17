@@ -1,0 +1,186 @@
+.home-header-container {
+  position: fixed;
+  top: 0;
+  height: 65px;
+  width: 100%;
+  padding: 0 100px;
+  background-color: #fff;
+  backface-visibility: hidden;
+  z-index: 1001;
+
+  .home-header-content {
+    width: 100%;
+    display: flex;
+    height: 100%;
+    //padding: 10px 0;
+    //align-items: center;
+    // gap: 10px;
+    justify-content: space-between;
+    .left-content {
+      //width: 25%;
+      display: flex;
+      cursor: pointer;
+
+      align-items: center;
+      justify-content: center;
+      i {
+        font-size: 150%;
+        margin-right: 5px;
+        margin-top: -10px;
+        opacity: 0.6;
+      }
+      .header-logo {
+        height: 33px;
+        width: 150px;
+        background: url("../../../assets/logo.svg") center center no-repeat;
+      }
+    }
+    .center-content {
+      width: 55%;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      span {
+        font-size: 10px;
+        color: gray;
+      }
+    }
+    .right-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 25px;
+      .support {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        i {
+          margin-right: 3px;
+          color: #2fc0d7;
+          font-size: 15px;
+        }
+      }
+      .lang {
+        display: flex;
+        .lang-vi {
+          margin-right: 7px;
+          opacity: 0.5;
+          span {
+            cursor: pointer;
+            &:hover {
+              color: red;
+            }
+          }
+          &.action {
+            opacity: 1;
+            color: red;
+          }
+        }
+        .lang-en {
+          opacity: 0.5;
+          span {
+            cursor: pointer;
+            &:hover {
+              color: blue;
+            }
+          }
+          &.action {
+            opacity: 1;
+            color: blue;
+          }
+        }
+      }
+    }
+  }
+}
+.home-header-banner {
+  background: url("../../../assets/bkc-banner.jpg");
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 685px;
+  .banner-content {
+    height: 100%;
+    .banner-search {
+      background-image: linear-gradient(
+        rgba(0, 0, 0, 0.25),
+        rgba(255, 255, 255, 0.1)
+      );
+      padding-top: 127px;
+      padding-bottom: 220px;
+      .title {
+        margin-top: 0;
+        margin-bottom: 15px;
+        font-weight: 400;
+        font-size: 30px;
+        color: #fff;
+        text-transform: uppercase;
+        text-shadow: 1px 1px 1px #333;
+      }
+      .search {
+        width: 30%;
+        margin: 0 auto;
+        background-color: #f7d800;
+        padding: 12px 15px;
+        border-radius: 25px;
+        display: flex;
+        align-items: center;
+        i {
+          margin-right: 10px;
+        }
+        input {
+          width: 88%;
+          border: none;
+          outline: none;
+          background-color: transparent;
+        }
+      }
+    }
+    .banner-options {
+      background-image: linear-gradient(
+        rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0.9),
+        rgba(255, 255, 255, 1)
+      );
+      .options {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 186px;
+        .options-content {
+          text-align: center;
+          width: 150px;
+          line-height: 24px;
+          height: 118px;
+          cursor: pointer;
+          .opt-icon {
+            background-color: #fff;
+            margin: 0 auto;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            font-size: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2fc0d7;
+            box-shadow: 0px 1px 5px rgb(107, 104, 104);
+          }
+          .opt-title {
+            width: 50%;
+            margin: 0 auto;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: capitalize;
+          }
+        }
+        .options-content:hover {
+          color: #2fc0d7;
+        }
+      }
+    }
+  }
+}
