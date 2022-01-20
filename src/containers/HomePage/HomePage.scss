@@ -46,9 +46,10 @@
       .selection-custommize {
         .bg-image {
           height: 150px;
-          width: 270px;
-          background-position: center center;
-          background-repeat: no-repeat;
+          width: 275px;
+          margin: 0 auto;
+          background-position: center center !important;
+          background-repeat: no-repeat !important;
           background-size: cover !important;
           &.selection-specialty {
             background: url("../../assets/spectialty/co-xuong-khop.jpg");
@@ -57,6 +58,7 @@
             background: url("../../assets/medical-facilities/benh-vien-thu-cuc.jpg");
           }
           &.selection-outstanding-doctor {
+            background-color: #fcfcfc;
             padding: 10px 5px;
             height: 100%;
             border: 2px solid #eee;
@@ -68,7 +70,10 @@
                 height: 120px;
                 width: 120px;
                 border-radius: 50%;
-                background: url("../../assets/medical-facilities/benh-vien-thu-cuc.jpg");
+                // background: url("../../assets/medical-facilities/benh-vien-thu-cuc.jpg");
+                background-position: center center !important;
+                background-repeat: no-repeat !important;
+                background-size: cover !important;
               }
 
               &:hover {
@@ -139,6 +144,10 @@
 }
 .slick-next {
   right: -15px !important;
+}
+.slick-disabled {
+  display: none !important
+  ;
 }
 .slick-prev:before,
 .slick-next:before {

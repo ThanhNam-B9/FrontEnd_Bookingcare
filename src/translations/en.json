@@ -13,7 +13,7 @@
   },
 
   "banner": {
-    "medical-background": "Medical Background",
+    "medical-background": "MEDICAL PLATFORM",
     "care": "COMPREHENSIVE HEALTH CARE",
     "search": "Search",
     "specialist": "specialist examination",
@@ -55,5 +55,12 @@
     "image": "Avatar",
     "save": "Save user",
     "edit": "Edit user"
+  },
+
+  "homepage": {
+    "out-standing-doctor": {
+      "top-doctor-week": "Outstanding Doctor of the Week",
+      "see-more": "See more"
+    }
   }
 }

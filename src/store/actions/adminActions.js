@@ -112,8 +112,6 @@ export const fecthAllUserStart = () => {
   return async (dispatch, getState) => {
     try {
       let res = await _getAllUsers("All");
-      let res1 = await _getTopDoctorHome(2);
-      console.log("nam doctor", res1);
       if (res && res.errCode === 0) {
         dispatch(fecthAllUserSucess(res.users.reverse()));
       } else {
@@ -182,3 +180,28 @@ export const fecthEditUserSucess = () => ({
 export const fecthEditUserFaidled = () => ({
   type: actionTypes.FETCH_DELETE_USER_FAIDLED,
 });
+// let res1 = await _getTopDoctorHome(3);
+export const fecthGetTopDoctor = () => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await _getTopDoctorHome("");
+      console.log("res", res.data);
+      if (res && res.errCode === 0) {
+        dispatch({
+          type: actionTypes.FETCH_GET_DOCTOR_SUCCESS,
+          data: res.data,
+        });
+      } else {
+        dispatch({
+          type: actionTypes.FETCH_GET_DOCTOR_FAIDLED,
+        });
+        console.log("GET DOCTOR ERROR");
+      }
+    } catch (e) {
+      dispatch({
+        type: actionTypes.FETCH_GET_DOCTOR_FAIDLED,
+      });
+      console.log("GFETCH_GET_DOCTOR_FAIDLED: ", e);
+    }
+  };
+};

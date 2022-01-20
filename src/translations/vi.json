@@ -55,5 +55,11 @@
     "image": "Ảnh đại diện",
     "save": "Lưu user",
     "edit": "Lưu thay đổi"
+  },
+  "homepage": {
+    "out-standing-doctor": {
+      "top-doctor-week": "Bác sĩ nổi tiếng qua tuần qua",
+      "see-more": "xem thêm"
+    }
   }
 }
