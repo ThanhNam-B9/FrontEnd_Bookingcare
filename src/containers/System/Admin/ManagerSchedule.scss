@@ -1,0 +1,22 @@
+.manager-schedule-container {
+  padding: 0 10px;
+  margin-bottom: 10px;
+  .m-s-title {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 22px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .pick-hour-container {
+    padding: 20px 0;
+    text-align: center;
+    button {
+      color: black;
+      border: 1px solid #6666;
+      &.active {
+        background-color: #fff04b;
+      }
+    }
+  }
+}

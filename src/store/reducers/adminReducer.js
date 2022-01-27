@@ -7,6 +7,8 @@ const initialState = {
   positions: [],
   users: [],
   topDoctors: [],
+  allDoctors: [],
+  allScheduleTimes: [],
 };
 
 const adminReducer = (state = initialState, action) => {
@@ -69,14 +71,35 @@ const adminReducer = (state = initialState, action) => {
         ...state,
       };
     //get topDoctor
-    case actionTypes.FETCH_GET_DOCTOR_SUCCESS:
+    case actionTypes.FETCH_GET_TOP_DOCTOR_SUCCESS:
       state.topDoctors = action.data;
-      console.log("doctorReducer", state.topDoctors);
       return {
         ...state,
       };
-    case actionTypes.FETCH_GET_DOCTOR_FAIDLED:
-      state.topDoctor = [];
+    case actionTypes.FETCH_GET_TOP_DOCTOR_FAIDLED:
+      state.topDoctors = [];
+      return {
+        ...state,
+      };
+    //get all Doctor
+    case actionTypes.FETCH_GET_ALL_DOCTOR_SUCCESS:
+      state.allDoctors = action.data;
+      return {
+        ...state,
+      };
+    case actionTypes.FETCH_GET_ALL_DOCTOR_FAIDLED:
+      state.allDoctors = [];
+      return {
+        ...state,
+      };
+    //get schedule times
+    case actionTypes.FETCH_ALLCODE_SCHEDULE_TIMES_SUCCESS:
+      state.allScheduleTimes = action.data;
+      return {
+        ...state,
+      };
+    case actionTypes.FETCH_ALLCODE_SCHEDULE_TIMES_FAIDLED:
+      state.allScheduleTimes = [];
       return {
         ...state,
       };

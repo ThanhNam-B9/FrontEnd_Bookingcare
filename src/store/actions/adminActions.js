@@ -7,6 +7,8 @@ import {
   _deleteUser,
   _putEditUser,
   _getTopDoctorHome,
+  _getAllDoctors,
+  _postSaveDetailDoctor,
 } from "../../services/userService";
 
 //GET Gender
@@ -180,28 +182,99 @@ export const fecthEditUserSucess = () => ({
 export const fecthEditUserFaidled = () => ({
   type: actionTypes.FETCH_DELETE_USER_FAIDLED,
 });
-// let res1 = await _getTopDoctorHome(3);
+// GET DOCTORS
 export const fecthGetTopDoctor = () => {
   return async (dispatch, getState) => {
     try {
       let res = await _getTopDoctorHome("");
-      console.log("res", res.data);
       if (res && res.errCode === 0) {
         dispatch({
-          type: actionTypes.FETCH_GET_DOCTOR_SUCCESS,
+          type: actionTypes.FETCH_GET_TOP_DOCTOR_SUCCESS,
           data: res.data,
         });
       } else {
         dispatch({
-          type: actionTypes.FETCH_GET_DOCTOR_FAIDLED,
+          type: actionTypes.FETCH_GET_TOP_DOCTOR_FAIDLED,
         });
-        console.log("GET DOCTOR ERROR");
+        console.log("GET TOP DOCTOR ERROR");
       }
     } catch (e) {
       dispatch({
-        type: actionTypes.FETCH_GET_DOCTOR_FAIDLED,
+        type: actionTypes.FETCH_GET_TOP_DOCTOR_FAIDLED,
       });
-      console.log("GFETCH_GET_DOCTOR_FAIDLED: ", e);
+      console.log("FETCH_GET_TOP_DOCTOR_FAIDLED: ", e);
+    }
+  };
+};
+// GET ALL DOCTORS
+export const fecthGetAllDoctor = () => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await _getAllDoctors();
+      if (res && res.errCode === 0) {
+        dispatch({
+          type: actionTypes.FETCH_GET_ALL_DOCTOR_SUCCESS,
+          data: res.data,
+        });
+      } else {
+        dispatch({
+          type: actionTypes.FETCH_GET_ALL_DOCTOR_FAIDLED,
+        });
+        console.log("GET ALL DOCTOR ERROR");
+      }
+    } catch (e) {
+      dispatch({
+        type: actionTypes.FETCH_GET_ALL_DOCTOR_FAIDLED,
+      });
+      console.log("GFETCH_GET_AL_DOCTOR_FAIDLED: ", e);
+    }
+  };
+};
+export const saveDetailDoctor = (data) => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await _postSaveDetailDoctor(data);
+      if (res && res.errCode === 0) {
+        toast.success("Save detail doctor succeed");
+        dispatch({
+          type: actionTypes.SAVE_DETAIL_DOCTOR_SUCCESS,
+        });
+      } else {
+        toast.error("Save detail doctor faidled !");
+        dispatch({
+          type: actionTypes.SAVE_DETAIL_DOCTOR_FAIDLED,
+        });
+        console.log("SAVE DETAIL DOCTOR ERROR !");
+      }
+    } catch (e) {
+      dispatch({
+        type: actionTypes.SAVE_DETAIL_DOCTOR_FAIDLED,
+      });
+      console.log("SAVE_DETAIL_DOCTOR_FAIDLED: ", e);
+    }
+  };
+};
+export const fecthAllcodeScheduleTime = () => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await _getAllCodes("time");
+
+      if (res && res.errCode === 0) {
+        dispatch({
+          type: actionTypes.FETCH_ALLCODE_SCHEDULE_TIMES_SUCCESS,
+          data: res.data,
+        });
+      } else {
+        dispatch({
+          type: actionTypes.FETCH_ALLCODE_SCHEDULE_TIMES_FAIDLED,
+        });
+        console.log("GET ALL DOCTOR ERROR");
+      }
+    } catch (e) {
+      dispatch({
+        type: actionTypes.FETCH_ALLCODE_SCHEDULE_TIMES_FAIDLED,
+      });
+      console.log("FETCH_ALLCODE_SCHEDULE_TIMES_FAIDLED: ", e);
     }
   };
 };

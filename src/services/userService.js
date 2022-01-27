@@ -33,6 +33,23 @@ const _getAllCodes = (typeInput) => {
 const _getTopDoctorHome = (limitInput) => {
   return axios.get(`/api/top-doctor-home?limit=${limitInput}`);
 };
+const _getAllDoctors = () => {
+  return axios.get(`/api/get-all-doctors`);
+};
+const _postSaveDetailDoctor = (data) => {
+  return axios.post(`/api/save-info-doctors`, data);
+};
+const _getDetailDoctorById = (doctorId) => {
+  return axios.get(`/api/get-detail-doctor-by-id?id=${doctorId}`);
+};
+const _postBulkCreateSchedule = (data) => {
+  return axios.post(`/api/bulk-create-schedule`, data);
+};
+const _getScheduleDoctorByDate = (doctorId, date) => {
+  return axios.get(
+    `/api/get-schedule-doctor-by-date?date=${date}&doctorId=${doctorId}`
+  );
+};
 export {
   handleLoginApi,
   _getAllUsers,
@@ -41,4 +58,9 @@ export {
   _putEditUser,
   _getAllCodes,
   _getTopDoctorHome,
+  _getAllDoctors,
+  _postSaveDetailDoctor,
+  _getDetailDoctorById,
+  _postBulkCreateSchedule,
+  _getScheduleDoctorByDate,
 };

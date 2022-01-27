@@ -5,6 +5,7 @@ import Slider from "react-slick";
 import { connect } from "react-redux";
 import { LANGUEGA } from "../../../utils";
 import { FormattedMessage } from "react-intl";
+import { withRouter } from "react-router";
 class OutstandingDoctor extends Component {
   constructor(props) {
     super(props);
@@ -12,6 +13,10 @@ class OutstandingDoctor extends Component {
       topDoctorArr: [],
     };
   }
+  handleViewDetailDoctor = (doctor) => {
+    console.log("doctor", doctor);
+    this.props.history.push(`/detial-doctor/${doctor.id}`);
+  };
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.topDoctors !== this.props.topDoctors) {
       this.setState({
@@ -53,7 +58,11 @@ class OutstandingDoctor extends Component {
                   let nameEn = ` ${item.positionData.valueEn}, ${item.lastName} ${item.firstName}`;
 
                   return (
-                    <div className="selection-custommize" key={index}>
+                    <div
+                      className="selection-custommize"
+                      key={index}
+                      onClick={() => this.handleViewDetailDoctor(item)}
+                    >
                       <div className="bg-image selection-outstanding-doctor">
                         <div className="bg-avatar">
                           <div
@@ -92,4 +101,6 @@ const mapDispatchToProps = (dispatch) => {
     loadTopdoctor: () => dispatch(actions.fecthGetTopDoctor()),
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(OutstandingDoctor);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(OutstandingDoctor)
+);

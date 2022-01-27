@@ -56,9 +56,17 @@ class Login extends Component {
       }
     }
   };
+  handleOnKeyDown = (event) => {
+    if (event.key === "Enter") {
+      this.handleLogin();
+    }
+  };
   render() {
     return (
-      <div className="login-background">
+      <div
+        className="login-background"
+        onKeyDown={(event) => this.handleOnKeyDown(event)}
+      >
         <div className="login-container">
           <div className="login-content row">
             <div className="col-12 login-text">Login</div>
