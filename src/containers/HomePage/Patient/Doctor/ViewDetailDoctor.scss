@@ -28,10 +28,17 @@
     }
   }
   .schedule-doctor {
-    height: auto;
-
+    min-height: 200px;
     padding: 10px 100px;
     border-bottom: 1px solid #ccc;
+    display: flex;
+    .schedule-doctor-left {
+      border-right: 2px solid #ccc;
+      width: 50%;
+    }
+    .schedule-doctor-right {
+      width: 50%;
+    }
   }
   .details-doctor {
     border-bottom: 1px solid #ccc;

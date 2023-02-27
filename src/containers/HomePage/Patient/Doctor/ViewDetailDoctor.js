@@ -1,16 +1,18 @@
-import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { _getDetailDoctorById } from "../../../../services/userService";
 import { LANGUEGA } from "../../../../utils";
 import HomeHeader from "../../Selection/HomeHeader";
+import DoctorExtrainfor from "./DoctorExtrainfor";
 import DoctorSchedule from "./DoctorSchedule";
+
 import "./ViewDetailDoctor.scss";
 class ViewDetailDoctor extends Component {
   constructor(props) {
     super(props);
     this.state = {
       detailDoctorArr: {},
+      currDoctorId: -1,
     };
   }
   async componentDidMount() {
@@ -20,6 +22,9 @@ class ViewDetailDoctor extends Component {
       this.props.match.params.id
     ) {
       let id = this.props.match.params.id;
+      this.setState({
+        currDoctorId: id,
+      });
       let res = await _getDetailDoctorById(id);
       if (res && res.errCode === 0) {
         this.setState({
@@ -29,7 +34,7 @@ class ViewDetailDoctor extends Component {
     }
   }
   render() {
-    let { detailDoctorArr } = this.state;
+    let { detailDoctorArr, currDoctorId } = this.state;
     let { language } = this.props;
     let nameEn,
       nameVi = "";
@@ -37,8 +42,6 @@ class ViewDetailDoctor extends Component {
       nameVi = ` ${detailDoctorArr.positionData.valueVi} ${detailDoctorArr.firstName} ${detailDoctorArr.lastName}`;
       nameEn = ` ${detailDoctorArr.positionData.valueEn} ${detailDoctorArr.lastName} ${detailDoctorArr.firstName}`;
     }
-
-    console.log("detailDoctorArr", detailDoctorArr);
     return (
       <>
         <HomeHeader isShowBanner={false} />
@@ -66,14 +69,11 @@ class ViewDetailDoctor extends Component {
             </div>
           </div>
           <div className="schedule-doctor">
-            <div className="content-left">
-              <DoctorSchedule
-                dotorIdFromParent={
-                  detailDoctorArr && detailDoctorArr.id
-                    ? detailDoctorArr.id
-                    : -1
-                }
-              />
+            <div className="schedule-doctor-left">
+              <DoctorSchedule dotorIdFromParent={currDoctorId} />
+            </div>
+            <div className="schedule-doctor-right">
+              <DoctorExtrainfor dotorIdFromParent={currDoctorId} />
             </div>
           </div>
           <div className="details-doctor">

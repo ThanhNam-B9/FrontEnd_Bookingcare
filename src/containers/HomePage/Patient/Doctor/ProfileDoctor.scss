@@ -1,0 +1,27 @@
+.introduce-doctor-container {
+  .introduce-doctor-modal {
+    display: flex;
+    margin-bottom: 10px;
+    .content-left {
+      height: 120px;
+      width: 120px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      border-radius: 50%;
+    }
+    .content-right {
+      padding: 5px 10px;
+      width: 60%;
+      h2 {
+        font-size: 20px;
+        margin-bottom: 10p;
+        font-weight: 600;
+      }
+      .introduce {
+        color: #555;
+        font-size: 13px;
+      }
+    }
+  }
+}

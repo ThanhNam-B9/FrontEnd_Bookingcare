@@ -1,6 +1,4 @@
 .doctor-schedule-container {
-  border-right: 1px solid #ccc;
-  width: 50%;
   .all-schedule-date {
     select {
       text-align: center;
@@ -21,7 +19,7 @@
       color: #333;
       font-weight: bold;
       padding: 0;
-      margin: 10px 0 5px 0;
+      margin: 10px 0 10px 0;
     }
     .time-content {
       display: flex;
@@ -33,7 +31,7 @@
       gap: 10px;
       text-align: left;
 
-      button {
+      .button {
         padding: 10px 15px;
         outline: none;
         border: none;
@@ -46,6 +44,23 @@
           color: #fff;
           cursor: pointer;
         }
+        &.btn-vi {
+          width: 120px;
+        }
+      }
+      .no-schedule {
+        font-style: italic;
+        font-size: 16px;
+        opacity: 0.8;
+      }
+    }
+    .book-free {
+      font-style: italic;
+      font-size: 14px;
+      opacity: 0.8;
+      i {
+        font-style: italic;
+        color: #337ab7;
       }
     }
   }

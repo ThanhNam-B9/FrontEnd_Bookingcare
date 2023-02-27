@@ -95,7 +95,6 @@ class ManagerSchedule extends Component {
     let { selectedDoctor, currDate, rangeTime } = this.state;
     let result = [];
     let formatCurrDate = new Date(currDate).getTime(); // dùng js
-    console.log("formatCurrDate", formatCurrDate);
     if (!selectedDoctor & _.isEmpty(selectedDoctor)) {
       toast.error("error doctor");
       return;
@@ -126,11 +125,17 @@ class ManagerSchedule extends Component {
       formatCurrDate: formatCurrDate,
       doctorId: selectedDoctor.value,
     });
-    console.log("res", res);
+    if (res && res.errCode === 0) {
+      toast.success("save infor succeed! ");
+    } else {
+      toast.error("Error _postBulkCreateSchedule");
+    }
   };
   render() {
     const { language } = this.props;
     const { listDoctors, selectedDoctor, currDate, rangeTime } = this.state;
+    const today = new Date();
+    const yesterday = new Date(today.setDate(today.getDate() - 1));
 
     return (
       <div className="manager-schedule-container">
@@ -157,7 +162,7 @@ class ManagerSchedule extends Component {
 
               <DatePicker
                 value={currDate}
-                minDate={new Date()}
+                minDate={yesterday}
                 onChange={this.handleOnchange}
                 className="form-control"
               />

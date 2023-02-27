@@ -5,17 +5,20 @@ import "./DoctorSchedule.scss";
 import "moment/locale/vi";
 import { LANGUEGA } from "../../../../utils";
 import { _getScheduleDoctorByDate } from "../../../../services/userService";
+import { FormattedMessage } from "react-intl";
+import BookingModal from "./Modal/BookingModal";
 class DoctorSchedule extends Component {
   constructor(props) {
     super(props);
     this.state = {
       allDays: [],
       allTimeInDay: [],
+      isShowBookingModal: false,
+      dataBookingModal: {},
     };
   }
 
-  setArrDays = () => {
-    let { language } = this.props;
+  getArrDays = (language) => {
     let currDay = new Date();
     // console.log("moment en: ", moment(currDay).format("dddd - DD/MM"));
     // console.log(
@@ -28,26 +31,58 @@ class DoctorSchedule extends Component {
     for (let i = 0; i < 7; i++) {
       let object = {};
       if (language === LANGUEGA.VI) {
-        object.label = moment(currDay).add(i, "days").format("dddd - DD/MM");
+        if (i === 0) {
+          let ddMM = moment(currDay).format("DD/MM");
+          let today = `Hôm nay - ${ddMM}`;
+          object.label = today;
+        } else {
+          object.label = moment(currDay).add(i, "days").format("dddd - DD/MM");
+        }
       } else {
-        object.label = moment(currDay)
-          .add(i, "days")
-          .locale("en")
-          .format("dddd - DD/MM");
+        if (i === 0) {
+          let ddMM = moment(currDay).format("DD/MM");
+          let today = `Today - ${ddMM}`;
+          object.label = today;
+        } else {
+          object.label = moment(currDay)
+            .add(i, "days")
+            .locale("en")
+            .format("dddd - DD/MM");
+        }
       }
       object.value = moment(currDay).add(i, "days").startOf("day").valueOf();
       allDays.push(object);
     }
-    this.setState({
-      allDays: allDays,
-    });
+    return allDays;
   };
-  componentDidMount() {
-    this.setArrDays();
+  async componentDidMount() {
+    let { language } = this.props;
+
+    let allDays = this.getArrDays(language);
+    if (allDays && allDays.length > 0) {
+      this.setState({
+        allDays: allDays,
+      });
+    }
   }
-  componentDidUpdate(prevProps, prevState) {
+  async componentDidUpdate(prevProps, prevState) {
     if (prevProps.language !== this.props.language) {
-      this.setArrDays();
+      let allDays = this.getArrDays(this.props.language);
+      this.setState({
+        allDays: allDays,
+      });
+    }
+    if (prevProps.dotorIdFromParent !== this.props.dotorIdFromParent) {
+      let allDays = this.getArrDays(this.props.language);
+      if (allDays && allDays.length > 0) {
+        let res = await _getScheduleDoctorByDate(
+          this.props.dotorIdFromParent,
+          allDays[0].value
+        );
+        this.setState({
+          allTimeInDay: res.data ? res.data : [],
+        });
+      }
     }
   }
   handleOnchangeSelect = async (event) => {
@@ -57,6 +92,7 @@ class DoctorSchedule extends Component {
       let date = event.target.value;
       let doctorId = dotorIdFromParent;
       let res = await _getScheduleDoctorByDate(doctorId, date);
+
       if (res && res.errCode === 0) {
         this.setState({
           allTimeInDay: res.data ? res.data : [],
@@ -64,10 +100,20 @@ class DoctorSchedule extends Component {
       }
     }
   };
+  handleBookingModal = (time) => {
+    this.setState({
+      isShowBookingModal: true,
+      dataBookingModal: time,
+    });
+  };
+  handleCloseBookingModal = () => {
+    this.setState({ isShowBookingModal: false });
+  };
   render() {
-    let { allDays, allTimeInDay } = this.state;
+    let { allDays, allTimeInDay, isShowBookingModal, dataBookingModal } =
+      this.state;
     let { language } = this.props;
-    console.log("allTimeInDay", allTimeInDay);
+
     return (
       <div className="doctor-schedule-container">
         <div className="all-schedule-date">
@@ -86,20 +132,51 @@ class DoctorSchedule extends Component {
         <div className="all-schedule-time">
           <div className="text-calendar">
             <span>
-              <i className="far fa-calendar-alt"> Lịch khám</i>
+              <i className="far fa-calendar-alt">
+                {" "}
+                <FormattedMessage id="patient.detail-doctor.schedule" />
+              </i>
             </span>
           </div>
-          <div className="time-content">
+          <div>
             {allTimeInDay && allTimeInDay.length > 0 ? (
-              allTimeInDay.map((item, index) => {
-                let timeDisplay =
-                  language === LANGUEGA.VI
-                    ? item.timeTypeData.valueVi
-                    : item.timeTypeData.valueEn;
-                return <button key={index}>{timeDisplay}</button>;
-              })
+              <>
+                <div className="time-content">
+                  {allTimeInDay.map((item, index) => {
+                    let timeDisplay =
+                      language === LANGUEGA.VI
+                        ? item.timeTypeData.valueVi
+                        : item.timeTypeData.valueEn;
+                    return (
+                      <button
+                        key={index}
+                        className={
+                          language === LANGUEGA.VI
+                            ? "button btn-vi"
+                            : "button btn-en"
+                        }
+                        onClick={() => this.handleBookingModal(item)}
+                      >
+                        {timeDisplay}
+                        <BookingModal
+                          isShowBookingModal={isShowBookingModal}
+                          closeBookingModal={this.handleCloseBookingModal}
+                          dataBookingModal={dataBookingModal}
+                        />
+                      </button>
+                    );
+                  })}
+                </div>
+                <div className="book-free">
+                  <FormattedMessage id="patient.detail-doctor.choose" />{" "}
+                  <i className="fas fa-hand-point-up"></i>{" "}
+                  <FormattedMessage id="patient.detail-doctor.book-free" />
+                </div>
+              </>
             ) : (
-              <div>Không có lịch khám của bác sĩ trong ngày này</div>
+              <div className="no-schedule">
+                <FormattedMessage id="patient.detail-doctor.no-schedule" />
+              </div>
             )}
           </div>
         </div>

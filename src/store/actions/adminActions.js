@@ -278,3 +278,42 @@ export const fecthAllcodeScheduleTime = () => {
     }
   };
 };
+
+// get allcode required
+export const fetchRequiredDoctorInforSrart = () => {
+  return async (dispatch, getState) => {
+    try {
+      dispatch({ type: actionTypes.FETCH_REQUIRED_DOCTOR_INFOR_START });
+      let resPrice = await _getAllCodes("price");
+      let resPayment = await _getAllCodes("payment");
+      let resProvince = await _getAllCodes("province");
+      let data = {
+        resPrice: resPrice.data,
+        resPayment: resPayment.data,
+        resProvince: resProvince.data,
+      };
+      if (
+        resPrice &&
+        resPrice.errCode === 0 &&
+        resPayment &&
+        resPayment.errCode === 0 &&
+        resProvince &&
+        resProvince.errCode === 0
+      ) {
+        dispatch(fetchRequiredDoctorInforSuccess(data));
+      }
+    } catch (e) {
+      dispatch(fetchRequiredDoctorInforFaied());
+      console.log("fetchRequiredDoctorInforFaied", e);
+    }
+  };
+};
+
+export const fetchRequiredDoctorInforSuccess = (data) => ({
+  type: actionTypes.FETCH_REQUIRED_DOCTOR_INFOR_SUCCESS,
+  data: data,
+});
+
+export const fetchRequiredDoctorInforFaied = () => ({
+  type: actionTypes.FETCH_REQUIRED_DOCTOR_INFOR_FAIDLED,
+});

@@ -17,7 +17,7 @@ class Header extends Component {
   }
   componentDidMount() {
     let { userInfo } = this.props;
-    console.log("userInfo", userInfo);
+
     let menu = [];
     if (userInfo && !_.isEmpty(userInfo)) {
       let role = userInfo.roleId;
@@ -27,7 +27,6 @@ class Header extends Component {
       if (role === USER_ROLE.DOCTOR) {
         menu = doctorMenu;
       }
-      console.log(doctorMenu);
       this.setState({
         menuApp: menu,
       });
@@ -40,7 +39,6 @@ class Header extends Component {
   render() {
     const { processLogout, language, userInfo } = this.props;
     const { menuApp } = this.state;
-    console.log("menuApp", menuApp);
     return (
       <div className="header-container">
         {/* thanh navigator */}
